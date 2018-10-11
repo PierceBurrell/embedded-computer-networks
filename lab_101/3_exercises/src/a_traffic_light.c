@@ -42,17 +42,21 @@ int main()
   // loop forever ...
   while(1)
   {
+		// Red
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET); // Turn LED ON
 		HAL_Delay(500); // Delay
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET); // Turn LED OFF
-				
+		// Amber		
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET); // Turn LED ON
 		HAL_Delay(500); // Delay
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET); // Turn LED OFF
-		
+		// Green
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_SET); // Turn LED ON
 		HAL_Delay(500); // Delay
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_RESET); // Turn LED OFF
+		
+	}
+
 		
 //    // toggle the led on the gpio pin
 //    toggle_gpio(led);    
@@ -70,5 +74,5 @@ int main()
 		// comment to check update
 		
 
-  }
+ 
 }

@@ -13,6 +13,7 @@
 
   <project>
     <PathAndName>.\2_blinky_with_shu_libraries\mdk-arm\blinky_with_libraries.uvprojx</PathAndName>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
   <project>
