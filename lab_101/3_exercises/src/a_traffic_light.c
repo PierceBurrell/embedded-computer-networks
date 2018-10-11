@@ -30,6 +30,7 @@ int main()
 {
   // we need to initialise the hal library and set up the SystemCoreClock 
   // properly
+
   HAL_Init();
   init_sysclk_216MHz();
   
@@ -54,6 +55,12 @@ int main()
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_SET); // Turn LED ON
 		HAL_Delay(500); // Delay
 		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_1, GPIO_PIN_RESET); // Turn LED OFF
+		
+		// Amber		
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET); // Turn LED ON
+		HAL_Delay(500); // Delay
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET); // Turn LED OFF
+		
 		
 	}
 

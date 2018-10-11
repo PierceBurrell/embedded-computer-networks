@@ -428,6 +428,11 @@
               </FileOption>
             </File>
             <File>
+              <FileName>b_led_dice.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\b_led_dice.c</FilePath>
+            </File>
+            <File>
               <FileName>b_traffic_lights.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\b_traffic_lights.c</FilePath>
