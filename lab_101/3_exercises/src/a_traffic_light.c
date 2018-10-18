@@ -20,8 +20,13 @@
 #include "clock.h"
 #include "gpio.h"
 
+<<<<<<< HEAD
 // map the led to GPIO PI1 (again, this is the inbuilt led)
 gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
+=======
+// map the led to gpio pins
+gpio_pin_t led1 = {PA_8,  GPIOA, GPIO_PIN_8};
+>>>>>>> upstream/master
 
 gpio_pin_t led2 = {PB_14, GPIOB, GPIO_PIN_14};
 
@@ -32,6 +37,7 @@ int main()
 {
   // we need to initialise the hal library and set up the SystemCoreClock 
   // properly
+<<<<<<< HEAD
 
   HAL_Init();
   init_sysclk_216MHz();
@@ -82,6 +88,10 @@ int main()
 		
 		// comment to check update
 		
+=======
+  HAL_Init();
+  init_sysclk_216MHz();
+>>>>>>> upstream/master
 
  
 }

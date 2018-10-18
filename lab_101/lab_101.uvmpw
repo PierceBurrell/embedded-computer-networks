@@ -9,7 +9,10 @@
 
   <project>
     <PathAndName>.\1_blinky\mdk-arm\blinky.uvprojx</PathAndName>
+<<<<<<< HEAD
     <NodeIsExpanded>1</NodeIsExpanded>
+=======
+>>>>>>> upstream/master
   </project>
 
   <project>
@@ -28,6 +31,7 @@
 
   <project>
     <PathAndName>.\5_analog_blink_rate\mdk-arm\analog_blink.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
