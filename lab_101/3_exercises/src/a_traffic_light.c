@@ -9,6 +9,8 @@
  * date:      01/09/2018
  * purpose:   55-604481 embedded computer networks : lab 101
  */
+ 
+ // Make sure you exlude the other shitty c - codes
 
 // include the hal drivers
 #include "stm32f7xx_hal.h"
