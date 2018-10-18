@@ -24,7 +24,7 @@
 // specify a welcome message
 const char * welcome_message[2] = 
 {
-  "*     Hello LCD World!     *",
+  "*      Pierce Burrell      *",
   "*      Welcome to SHU      *"
 };
 
@@ -67,7 +67,7 @@ int main()
   {
     // format a string based around the uptime counter
     char str[20];
-    sprintf(str, "%d s", counter++);
+    sprintf(str, "%d s", counter++); // Red dot removed so continuously run
     
     // print the message to the lcd
     BSP_LCD_ClearStringLine(6);
