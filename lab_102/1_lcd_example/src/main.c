@@ -33,7 +33,7 @@ const char * welcome_message[2] =
 
 // CODE
 	gpio_pin_t pot = {PA_0, GPIOA, GPIO_PIN_0}; // SETS POT PIN UP PIN 0 MAP
-	gpio_pin_t temp = {PI_2, GPIOI, GPIO_PIN_2}; // SETS POT PIN UP PIN 0 MAP
+	gpio_pin_t temp = {PA_15, GPIOA, GPIO_PIN_15}; // SETS POT PIN UP PIN 0 MAP
 
 // this is the main method
 int main()
@@ -46,9 +46,7 @@ int main()
 	init_adc(pot); // SETTING ADC AS PIN POT
 	init_adc(temp); // SETTING ADC AS TEMP PIN
 
-
-
-  
+ 
   // initialise the lcd
   BSP_LCD_Init();
   BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER, SDRAM_DEVICE_ADDR);
@@ -83,12 +81,12 @@ int main()
 		
     // format a string based around the uptime counter
     char str[12];
-    sprintf(str, "ADC = %4d", adc_val);
+    sprintf(str, "Raw ADC: = %4d", adc_val);
 		BSP_LCD_ClearStringLine(6); //clr string
     BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
 		
 		// making percentage reading Constrained
-    sprintf(str, "ADC = %03.2f", (adc_val/4095.0)*100); // Converts to Percent float 2 decimal places
+    sprintf(str, "Pot Value: = %03.1f", (adc_val/4095.0)*35); // Converts to Percent float 2 decimal places
 		BSP_LCD_ClearStringLine(7); //clr string
     BSP_LCD_DisplayStringAtLine(7, (uint8_t *)str); // clearing string for line 7
 		
@@ -98,11 +96,10 @@ int main()
 		BSP_LCD_SetTextColor(LCD_COLOR_BLUE); // Your actual graph colour	
 		BSP_LCD_FillRect(0, 200, 480*(adc_val/4095.0), 20); // Actual values changing 480 pixels width
 		
-		HAL_Delay(100);
 		
 		// Temp Print
-//  sprintf(str, "Temp = %03.2f", (((temp_val/4095.0)*3300)- 500) / 10.0); // Converts to Percent float 2 decimal places
-		sprintf(str, "Temp = %02.2f", (Temperature));
+		sprintf(str, "Temp = %03.2f", (((temp_val/4095.0)*3300)- 500) / 10.0); // Converts to Percent float 2 decimal places
+//	sprintf(str, "Temp: = %03.3f", (Temperature));
 		BSP_LCD_ClearStringLine(9); //clr string
     BSP_LCD_DisplayStringAtLine(9, (uint8_t *)str); // clearing string for line 7
     
