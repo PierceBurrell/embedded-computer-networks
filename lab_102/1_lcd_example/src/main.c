@@ -33,7 +33,7 @@ const char * welcome_message[2] =
 
 // CODE
 	gpio_pin_t pot = {PA_0, GPIOA, GPIO_PIN_0}; // SETS POT PIN UP PIN 0 MAP
-	gpio_pin_t temp = {PA_15, GPIOA, GPIO_PIN_15}; // SETS POT PIN UP PIN 0 MAP
+	gpio_pin_t temp = {PF_10, GPIOF, GPIO_PIN_10}; // SETS POT PIN UP PIN 0 MAP
 
 // this is the main method
 int main()
@@ -73,6 +73,7 @@ int main()
   while(1)
   {
 		// Reading the adc pot value
+		// Analog Input Is PA_0 --> PF_6
 		uint16_t adc_val = read_adc(pot);
 		uint16_t temp_val = read_adc(temp);
 		
