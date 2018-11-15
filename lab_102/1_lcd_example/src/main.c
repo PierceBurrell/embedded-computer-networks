@@ -15,6 +15,8 @@
 #include "pinmappings.h"
 #include "clock.h"
 #include "stm32746g_discovery_lcd.h"
+#include <stdio.h>
+#include <adc.h>
 
 // LCD DEFINES
 
@@ -22,13 +24,16 @@
 #define BOARDER     "****************************"
 
 // specify a welcome message
-const char * welcome_message[2] = 
+const char * welcome_message[2] =
+
 {
   "*      Pierce Burrell      *",
   "*      Welcome to SHU      *"
 };
 
 // CODE
+	gpio_pin_t pot = {PA_0, GPIOA, GPIO_PIN_0}; // SETS POT PIN UP PIN 0 MAP
+	gpio_pin_t temp = {PI_2, GPIOI, GPIO_PIN_2}; // SETS POT PIN UP PIN 0 MAP
 
 // this is the main method
 int main()
@@ -37,6 +42,12 @@ int main()
   // properly
   HAL_Init();
   init_sysclk_216MHz();
+	
+	init_adc(pot); // SETTING ADC AS PIN POT
+	init_adc(temp); // SETTING ADC AS TEMP PIN
+
+
+
   
   // initialise the lcd
   BSP_LCD_Init();
@@ -44,14 +55,14 @@ int main()
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER);
 
   // set the background colour to blue and clear the lcd
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_Clear(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
   
   // set the font to use
   BSP_LCD_SetFont(&Font24); 
   
   // print the welcome message ...
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE); // CHANGED TO BLUE CUZ COOL
   BSP_LCD_DisplayStringAtLine(0, (uint8_t *)BOARDER);
   BSP_LCD_DisplayStringAtLine(1, (uint8_t *)welcome_message[0]);
   BSP_LCD_DisplayStringAtLine(2, (uint8_t *)welcome_message[1]);
@@ -59,19 +70,41 @@ int main()
     
   // delay a little ...
   HAL_Delay(5000);
-  
-  // display an "uptime" counter
-  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"Current uptime =");
-  int counter = 0;
+
+	
   while(1)
   {
+		// Reading the adc pot value
+		uint16_t adc_val = read_adc(pot);
+		uint16_t temp_val = read_adc(temp);
+		
+		float Voltage = (3300.0 * (temp_val/4095.0)); // Calc For Voltage
+		float Temperature = (Voltage - 500) / 10.0; // Calc For Converting Volt To Temp 3.3V	
+		
     // format a string based around the uptime counter
-    char str[20];
-    sprintf(str, "%d s", counter++); // Red dot removed so continuously run
-    
-    // print the message to the lcd
-    BSP_LCD_ClearStringLine(6);
+    char str[12];
+    sprintf(str, "ADC = %4d", adc_val);
+		BSP_LCD_ClearStringLine(6); //clr string
     BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
+		
+		// making percentage reading Constrained
+    sprintf(str, "ADC = %03.2f", (adc_val/4095.0)*100); // Converts to Percent float 2 decimal places
+		BSP_LCD_ClearStringLine(7); //clr string
+    BSP_LCD_DisplayStringAtLine(7, (uint8_t *)str); // clearing string for line 7
+		
+		// bargraph - makes a line then you add another line on top [---   ]
+		BSP_LCD_SetTextColor(LCD_COLOR_BLACK); // Transparent (Same colour as ur bg)
+		BSP_LCD_FillRect(0, 200, 480, 20); // Creating rectangle
+		BSP_LCD_SetTextColor(LCD_COLOR_BLUE); // Your actual graph colour	
+		BSP_LCD_FillRect(0, 200, 480*(adc_val/4095.0), 20); // Actual values changing 480 pixels width
+		
+		HAL_Delay(100);
+		
+		// Temp Print
+//  sprintf(str, "Temp = %03.2f", (((temp_val/4095.0)*3300)- 500) / 10.0); // Converts to Percent float 2 decimal places
+		sprintf(str, "Temp = %02.2f", (Temperature));
+		BSP_LCD_ClearStringLine(9); //clr string
+    BSP_LCD_DisplayStringAtLine(9, (uint8_t *)str); // clearing string for line 7
     
     HAL_Delay(1000);
   }
