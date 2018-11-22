@@ -107,8 +107,8 @@ int main()
 		BSP_LCD_ClearStringLine(9); //clr string
     BSP_LCD_DisplayStringAtLine(9, (uint8_t *)str); // clearing string for line 7
 		
-		// Light Print
-		sprintf(str, "Temp = %03.2f", (light_val/4095.0)*100); // Converts to Percent float 2 decimal places
+		// Light Print -- Perform Calculation For %
+		sprintf(str, "Light = %03.2f", (light_val/4095.0)*100); // Converts to Percent float 2 decimal places
 		BSP_LCD_ClearStringLine(10); //clr string
     BSP_LCD_DisplayStringAtLine(10, (uint8_t *)str); // clearing string for line 7
     
