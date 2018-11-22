@@ -79,7 +79,7 @@ void led_1_thread(void const *argument)
   {
     // toggle the first led on the gpio pin
     toggle_gpio(led1);
-    dumb_delay(500);
+    dumb_delay(100);
   }
 }
 
