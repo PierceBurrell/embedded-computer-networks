@@ -18,6 +18,7 @@
 // declare the extern methods that set the threads up for us 
 extern int init_data_thread(void);
 extern int init_display_thread(void);
+extern int init_led1(void); //? ? ?
 
 // this is the main method
 int main()
